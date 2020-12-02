@@ -1,0 +1,8 @@
+.mainList{
+    margin-top: 60px;
+}
+
+.listItem{
+    display: flex;
+    padding: 10px;
+}
