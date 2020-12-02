@@ -1,29 +1,42 @@
 file = open("blah")
 result = []
-single = ""
-count = 0
-subs = []
 
 for x in file:
-    if count==3:
-        result.append(single[0:len(single)-1])
-        single=""
-        count=0
-    
-    single+=x[0:len(x)-1]+"-"
-    count+=1
+    result.append(x[0:len(x)-1])
 
-file.close()
 file = open("blah","a")
+file.write(str(result))
 
-for x in result:
-    file.write("{\n")
-    file.write("\'value\': \'"+x+"\',\n")
-    file.write("\'label\': \'"+x+"\'")
-    file.write("\n},")
 
-# file.write(result)
-print(result)
+
+
+
+# file = open("blah")
+# result = []
+# single = ""
+# count = 0
+# subs = []
+
+# for x in file:
+#     if count==3:
+#         result.append(single[0:len(single)-1])
+#         single=""
+#         count=0
+    
+#     single+=x[0:len(x)-1]+"-"
+#     count+=1
+
+# file.close()
+# file = open("blah","a")
+
+# for x in result:
+#     file.write("{\n")
+#     file.write("\'value\': \'"+x+"\',\n")
+#     file.write("\'label\': \'"+x+"\'")
+#     file.write("\n},")
+
+# # file.write(result)
+# print(result)
 
 
 

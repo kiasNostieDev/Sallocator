@@ -1,40 +1,39 @@
-II CSE
-CS8261
-C Programming Laboratory
-IV CSE
-CS8481
-Database Management Systems Laboratory
-IV CSE
-CS8461
-Operating Systems Laboratory
-VI  CSE
-CS8661
-Internet Programming Laboratory
-VI  CSE
-CS8662
-Mobile Application Development Laboratory
-VI  CSE
-CS8611
-Mini Project
-VIII CSE
-CS6811
-Project Work
-{
-'value': 'II CSE-CS8261-C Programming Laboratory',
-'label': 'II CSE-CS8261-C Programming Laboratory'
-},{
-'value': 'IV CSE-CS8481-Database Management Systems Laboratory',
-'label': 'IV CSE-CS8481-Database Management Systems Laboratory'
-},{
-'value': 'IV CSE-CS8461-Operating Systems Laboratory',
-'label': 'IV CSE-CS8461-Operating Systems Laboratory'
-},{
-'value': 'VI  CSE-CS8661-Internet Programming Laboratory',
-'label': 'VI  CSE-CS8661-Internet Programming Laboratory'
-},{
-'value': 'VI  CSE-CS8662-Mobile Application Development Laboratory',
-'label': 'VI  CSE-CS8662-Mobile Application Development Laboratory'
-},{
-'value': 'VI  CSE-CS8611-Mini Project',
-'label': 'VI  CSE-CS8611-Mini Project'
-},
+DSS
+NU
+KD
+MST
+SPL
+RK
+PGK
+ATP
+DS
+ND
+SSB
+SJ
+KM
+JBR
+MB
+MBS
+ASS
+KS
+JPN
+YAR
+DMDP
+AHNK
+SNN
+NRP
+CS
+KK
+VNK
+SSP
+STS
+GM
+VP
+----
+-----
+SKD
+KG
+TSK
+SMP
+NSG
+['DSS', 'NU', 'KD', 'MST', 'SPL', 'RK', 'PGK', 'ATP', 'DS', 'ND', 'SSB', 'SJ', 'KM', 'JBR', 'MB', 'MBS', 'ASS', 'KS', 'JPN', 'YAR', 'DMDP', 'AHNK', 'SNN', 'NRP', 'CS', 'KK', 'VNK', 'SSP', 'STS', 'GM', 'VP', '----', '-----', 'SKD', 'KG', 'TSK', 'SMP', 'NSG']

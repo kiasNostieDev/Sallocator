@@ -50,7 +50,7 @@ export default function Auth() {
             <div style={{margin:"10px"}}></div>
             <FormControl fullWidth variant="outlined">
               <InputLabel htmlFor="standard-adornment-amount" >Password</InputLabel>
-              <OutlinedInput onChange={(e)=>i2=e.target.value} labelWidth={100}/>
+              <OutlinedInput type="password" onChange={(e)=>i2=e.target.value} labelWidth={100}/>
             </FormControl>
             <div style={{display:"flex",marginTop:"10px",justifyContent:"flex-end"}}>
                 <Button id="btn" variant="outlined" onClick={handleClick} style={{justifyContent:"flex-end"}}>Okay</Button>

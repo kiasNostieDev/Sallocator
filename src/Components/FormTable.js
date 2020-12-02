@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   });
 
 var count = 1
+const shorties = ['DSS', 'NU', 'KD', 'MST', 'SPL', 'RK', 'PGK', 'ATP', 'DS', 'ND', 'SSB', 'SJ', 'KM', 'JBR', 'MB', 'MBS', 'ASS', 'KS', 'JPN', 'YAR', 'DMDP', 'AHNK', 'SNN', 'NRP', 'CS', 'KK', 'VNK', 'SSP', 'STS', 'GM', 'VP', '----', '-----', 'SKD', 'KG', 'TSK', 'SMP', 'NSG']
 
 export default function FormTable(props) {
 
@@ -60,7 +61,8 @@ export default function FormTable(props) {
               <TableBody>
                 {names.map(item=>{
                   count = names.indexOf(item)+1
-                  return <Test count={count} val={item}/>
+                  var sitem = shorties[count-1]
+                  return <Test count={count} sitem={sitem} val={item}/>
                 })}
               </TableBody>
             </Table>

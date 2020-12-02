@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import {CustomTableCell} from '@material-ui/core/';
 import TableCell from '@material-ui/core/TableCell'
 
-export default function Test({val, count}){
+export default function Test({val, count,sitem}){
 
     const customColumnStyle = {
         wordWrap: "break-word",
@@ -51,7 +51,7 @@ export default function Test({val, count}){
     return (
         <TableRow>
                     <TableCell align="left">{count}</TableCell>
-                    <TableCell align="left">{a.Name}</TableCell>
+                    <TableCell align="left">{sitem}</TableCell>
                     <TableCell>
                       <TableRow><CustomTableCell style={customColumnStyle}>{a['1st_Preference']}</CustomTableCell></TableRow>
                       <TableRow><TableCell>{a['2nd_Preference']}</TableCell></TableRow>
