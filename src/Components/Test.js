@@ -50,8 +50,8 @@ export default function Test({val, count,sitem}){
 
     return (
         <TableRow>
-                    <TableCell align="left">{count}</TableCell>
-                    <TableCell align="left">{sitem}</TableCell>
+                    <TableCell align="center">{count}</TableCell>
+                    <TableCell align="left">{val}</TableCell>
                     <TableCell>
                       <TableRow><CustomTableCell style={customColumnStyle}>{a['1st_Preference']}</CustomTableCell></TableRow>
                       <TableRow><TableCell>{a['2nd_Preference']}</TableCell></TableRow>

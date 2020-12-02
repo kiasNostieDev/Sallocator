@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { fbref } from '../App'
-import {names} from './ListOfTeachers'
 import Test from './Test'
 
 const useStyles = makeStyles({
@@ -19,6 +18,7 @@ const useStyles = makeStyles({
   });
 
 var count = 1
+const names = ['Dr.D.Shanthi', 'Dr.N.Uma Maheswari', 'Dr.K.Dhanalakshmi', 'Dr.M.S.Thanabal', 'Dr.S.Pushpalatha', 'Dr.R.Karthikeyan', 'Dr.P.Gokulakrishnan', 'Dr.A.Thomas Paul Roy', 'Dr.D.Suresh', 'Dr.N.Dhanalakshmi', 'Dr.S.Satheesbabu', 'Dr.S.Jeyanthi', 'Dr.K.Manivannan', 'Dr.J.Benadictraja', 'Dr.M.Buvana', 'Dr.M.Balasubramani', 'Dr.A.Sathya Sofia', 'Mr.K.Suresh', 'Mrs.J.Punitha Nicoline', 'Dr.Y.Arockia Raj', 'Dr.D.M.D.Preethi', 'Dr. A. H. Nandhu Kishore', 'Ms.S.Naganandhini', 'Mr.N.Rajesh Pandian', 'Mrs.C.Sathya', 'Mrs.K.Kalaivani', 'Mr.V.Nanda Kumar', 'Mrs.S.Santhana Prabha', 'Ms.S.T.Shenbagavalli', 'Mrs.G.Mariammal', 'Mrs.V.Priya', 'Mrs.M.Jayanthi', 'Mrs.A.Joyce', 'Mr.B.Sakthi Karthidurai', 'Mrs.K.Gayathri', 'Mr.T.Selvakumar', 'Mr.S.M.Prabin', 'Mr.N.Selvaganesh']
 const shorties = ['DSS', 'NU', 'KD', 'MST', 'SPL', 'RK', 'PGK', 'ATP', 'DS', 'ND', 'SSB', 'SJ', 'KM', 'JBR', 'MB', 'MBS', 'ASS', 'KS', 'JPN', 'YAR', 'DMDP', 'AHNK', 'SNN', 'NRP', 'CS', 'KK', 'VNK', 'SSP', 'STS', 'GM', 'VP', '----', '-----', 'SKD', 'KG', 'TSK', 'SMP', 'NSG']
 
 export default function FormTable(props) {
@@ -43,7 +43,7 @@ export default function FormTable(props) {
             <Table className={classes.table} size="small" aria-label="a dense table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="right">S.No</TableCell>
+                  <TableCell align="center">S.No</TableCell>
                   <TableCell align="center">Name</TableCell>
                   <TableCell align="center" colSpan={2}>Subjects Preferred</TableCell>
                   <TableCell align="center" colSpan={2}>Subjects Allocated</TableCell>

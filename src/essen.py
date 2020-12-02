@@ -1,11 +1,11 @@
-file = open("blah")
-result = []
+# file = open("blah")
+# result = []
 
-for x in file:
-    result.append(x[0:len(x)-1])
+# for x in file:
+#     result.append(x[0:len(x)-1])
 
-file = open("blah","a")
-file.write(str(result))
+# file = open("blah","a")
+# file.write(str(result))
 
 
 

@@ -60,11 +60,14 @@ const subs = [
     'value': 'VI  CSE-CS8603-Distributed Systems',
     'label': 'VI  CSE-CS8603-Distributed Systems'
     },{
-    'value': 'VI  CSE-CS8075-Data warehousing and Data mining',
-    'label': 'VI  CSE-CS8075-Data warehousing and Data mining'
+    'value': 'VIII CSE-CS8080-Information Retrieval Techniques',
+    'label': 'VIII CSE-CS8080-Information Retrieval Techniques'
     },{
-    'value': 'IV BME-nil-Fundamentals of Data Structures and Algorithms',
-    'label': 'IV BME-nil-Fundamentals of Data Structures and Algorithms'
+    'value': 'VI CSE-CS8075-Data warehousing and Data mining',
+    'label': 'VI CSE-CS8075-Data warehousing and Data mining'
+    },{
+    'value': 'IV BME-Fundamentals of Data Structures and Algorithms',
+    'label': 'IV BME-Fundamentals of Data Structures and Algorithms'
     },{
     'value': 'II ME CSE-CP5201-Network Design and Technologies',
     'label': 'II ME CSE-CP5201-Network Design and Technologies'
