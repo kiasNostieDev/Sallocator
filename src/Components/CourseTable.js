@@ -12,7 +12,35 @@ import Test from './Test'
 import {names} from './ListOfTeachers'
 import PreferredList from './PreferredList';
 
-const shorties = ['DSS', 'NU', 'KD', 'MST', 'SPL', 'RK', 'PGK', 'ATP', 'DS', 'ND', 'SSB', 'SJ', 'KM', 'JBR', 'MB', 'MBS', 'ASS', 'KS', 'JPN', 'YAR', 'DMDP', 'AHNK', 'SNN', 'NRP', 'CS', 'KK', 'VNK', 'SSP', 'STS', 'GM', 'VP', '----', '-----', 'SKD', 'KG', 'TSK', 'SMP', 'NSG']
+const subs =[
+    'II CSE-CS8251-Programming in C',
+    'IV CSE-CS8491-Computer Architecture',
+    'IV CSE-CS8492-Database Management Systems',
+    'IV CSE-CS8451-Design and Analysis of Algorithms',
+    'IV CSE-CS8493-Operating Systems',
+    'IV CSE-CS8494-Software Engineering',
+    'VI  CSE-CS8651-Internet Programming',
+    'VI  CSE-CS8691-Artificial Intelligence',
+    'VI  CSE-CS8601-Mobile Computing',
+    'VI  CSE-CS8602-Compiler Design',
+    'VI  CSE-CS8603-Distributed Systems',
+    'VIII CSE-CS8080-Information Retrieval Techniques',
+    'VI CSE-CS8075-Data warehousing and Data mining',
+    'IV BME-Fundamentals of Data Structures and Algorithms',
+    'II ME CSE-CP5201-Network Design and Technologies',
+    'II ME CSE-CP5291-Security Practices',
+    'II ME CSE-CP5292-Internet of Things',
+    'II ME CSE-CP5293-Big Data Analytics',
+    'II ME CSE-CP5094-Information Retrieval Techniques',
+    'II CSE-CS8261-C Programming Laboratory',
+    'IV CSE-CS8481-Database Management Systems Laboratory',
+    'IV CSE-CS8461-Operating Systems Laboratory',
+    'VI  CSE-CS8661-Internet Programming Laboratory',
+    'VI  CSE-CS8662-Mobile Application Development Laboratory',
+    'VI  CSE-CS8611-Mini Project',
+    'VIII Project'
+]
+export const shorties = ['DSS', 'NU', 'KD', 'MST', 'SPL', 'RK', 'PGK', 'ATP', 'DS', 'ND', 'SSB', 'SJ', 'KM', 'JBR', 'MB', 'MBS', 'ASS', 'KS', 'JPN', 'YAR', 'DMDP', 'AHNK', 'SNN', 'NRP', 'CS', 'KK', 'VNK', 'SSP', 'STS', 'GM', 'VP', 'Mrs.S.Jayanthi', 'Mrs.A.Joyce', 'SKD', 'KG', 'TSK', 'SMP', 'NSG']
 const useStyles = makeStyles({
     table: {
       minWidth: 700,
@@ -40,15 +68,14 @@ export default function CourseTable() {
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">S.No</TableCell>
-                            <TableCell align="center">Subject Name</TableCell>
-                            <TableCell align="center">Staffs Selected</TableCell>
+                            <TableCell align="left">Subject Name</TableCell>
+                            <TableCell align="left">Staffs Selected</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {names.map(item=>{
-                            var count = names.indexOf(item)+1
-                            var sitem = shorties[count-1]
-                            return <PreferredList count={count} sitem={sitem} val={item}/>
+                        {subs.map(item=>{
+                            var count = subs.indexOf(item)+1
+                            return <PreferredList count={count} val={item}/>
                         })}
                     </TableBody>
                 </Table>

@@ -6,6 +6,7 @@ import firebase from 'firebase'
 import Admin from './Components/Admin';
 import FormTable from './Components/FormTable';
 import CourseTable from './Components/CourseTable';
+import Tablecider from './Components/Tablecider';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Admin" component={Admin}/>
           <Route path="/FormTable" component={FormTable}/>
           <Route path="/CourseTable" component={CourseTable}/>
+          <Route path="/Tabledecider" component={Tablecider}/>
         </Switch>
       </div>
     </Router>
