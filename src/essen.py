@@ -42,7 +42,20 @@
 
 
 
+file = open("blah")
+result = []
 
+for x in file:
+    result.append(x)
+
+file.close()
+file = open("blah","a")
+
+file.write("\n{\n")
+for x in result:
+    file.write("\'"+x+"\': [],")
+
+file.write("},")
 
 
 

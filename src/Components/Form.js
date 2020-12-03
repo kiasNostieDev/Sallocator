@@ -105,6 +105,9 @@ const labs = [
     },{
     'value': 'VI  CSE-CS8611-Mini Project',
     'label': 'VI  CSE-CS8611-Mini Project'
+    },{
+        'value':'VIII Project',
+        'label':'VIII Project'
     }
 ]
 

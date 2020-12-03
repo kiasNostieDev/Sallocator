@@ -5,6 +5,7 @@ import GiveData from './Components/GiveData'
 import firebase from 'firebase'
 import Admin from './Components/Admin';
 import FormTable from './Components/FormTable';
+import CourseTable from './Components/CourseTable';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/GiveData/:slug" component={GiveData}/>
           <Route path="/Admin" component={Admin}/>
           <Route path="/FormTable" component={FormTable}/>
+          <Route path="/CourseTable" component={CourseTable}/>
         </Switch>
       </div>
     </Router>
