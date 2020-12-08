@@ -1,36 +1,20 @@
 import React from 'react'
 import firebase from 'firebase'
 import logo from "../icons/logo.png";
-import {FormControl, makeStyles, OutlinedInput, InputLabel, Button} from '@material-ui/core'
-import { Link, Redirect } from 'react-router-dom';
+import {FormControl, OutlinedInput, InputLabel, Button} from '@material-ui/core'
 import createHistory from 'history/createBrowserHistory'
 
 var history = createHistory()
-const useStyles = makeStyles(theme=>({
-    formDiv:{
-        margin: "10px",
-    },
-    margin: {
-        margin: theme.spacing(1),
-    },
-    formItems:{
-        paddingTop: "10px",
-        paddingBottom: "10px",
-    },
-}))
 //psnacsedept@gmail.com THe392335@@
 
 export default function Auth() {
-    var classes = useStyles()
 
     var i1,i2
-    var link = '/Admin'
 
     function handleClick(props){
         firebase.auth().signInWithEmailAndPassword(i1,i2).then(()=>{
             console.log('gremory')
-            link = '/FormTable'
-            history.push('/FormTable')  
+            history.push('/Tabledecider')  
             window.location.reload()
         }).catch(err=>{
             alert("auth failed it seems")

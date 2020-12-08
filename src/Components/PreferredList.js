@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { withStyles } from "@material-ui/core/styles";
+import React, { useState } from 'react'
 import { TableCell, TableRow } from '@material-ui/core';
 import { fbref } from '../App'
-import {names} from './ListOfTeachers'
 import {shorties} from './CourseTable'
 
 export default function PreferredList(props) {
@@ -47,16 +45,7 @@ export default function PreferredList(props) {
         "MrNSelvaganesh AsstProf",
     ]
     const [load, setLoad] = useState('0')
-    const customColumnStyle = {
-        wordWrap: "break-word",
-        maxWidth: "30px",
-    };
-    
     const [vas, setVAS] = useState()
-
-    const CustomTableCell = withStyles(theme => ({
-    
-    }))(TableCell);
 
     if(load==='0'){
         var subs =
@@ -112,7 +101,13 @@ export default function PreferredList(props) {
                 <TableCell>{vas[props.val]}</TableCell>
             </TableRow>
         )
-        else return <div>loading</div>
+        else return(
+            <TableRow>
+                <TableCell align="center">{props.count}</TableCell>
+                <TableCell align="left">Loading...</TableCell>
+                <TableCell>Loading...</TableCell>
+            </TableRow>
+        )
     }
 
     return (<Decider/>)

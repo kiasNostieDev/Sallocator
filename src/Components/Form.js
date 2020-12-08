@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import {FormControl, makeStyles, Typography, Box, Button} from '@material-ui/core'
 import {TextField, MenuItem} from '@material-ui/core'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { fbref } from '../App'
 
 const useStyles = makeStyles(theme=>({

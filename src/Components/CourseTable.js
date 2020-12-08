@@ -8,8 +8,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Test from './Test'
-import {names} from './ListOfTeachers'
 import PreferredList from './PreferredList';
 
 const subs =[
