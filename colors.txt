@@ -1,0 +1,11 @@
+#FF4000
+Red Orange
+
+#FEEFDD
+Antique white
+
+#50B2C0
+Pacific blue
+
+#201E1F
+Eerie black
