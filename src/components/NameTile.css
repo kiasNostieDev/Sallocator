@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
+
+.nameTile{
+    background-color: #F9F9F9;
+    overflow: hidden;
+    padding: 15px;
+    border: solid;
+    border-width: 0 1px 1px 1px;
+    border-radius: 0 0 5px 5px;
+}
+
+.nameName{
+    float: left;
+    text-transform: capitalize;
+    font-family: 'Mulish',sans-serif;
+    font-size: 23pt;
+    margin-left: 10px;
+}
+
+.nameButtoninside{
+    width: 100px;
+    height: 40px;
+    float: right;
+    margin: 7px 7px 0 7px;
+    background-color: #FF4000;
+    border-radius: 7px;
+    font-family: 'Mulish', sans-serif;
+    text-transform: lowercase;
+    font-weight: bold;
+    border: none;
+    font-size: 15pt;
+    color: white;
+}
+
+.nameButtoninside:hover{
+    letter-spacing: 2px;
+    transition: ease-out 0.2s;
+}
+
+@media only screen and (max-width: 600px) {
+    .nameName{
+        margin-left: 2px;
+        font-size: 15pt;
+    }
+
+    .nameButtoninside{
+        width: 70px;
+        height: 30px;
+        font-size: 12pt;
+        border-radius: 4px;
+    }
+}

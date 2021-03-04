@@ -1,6 +1,7 @@
 import React from 'react'
+import './navbar.css'
 
-export default function navbar() {
+export default function Navbar() {
     var navHead = 'Subject Allocation'
 
     const setNavHead = (gotNavHead)=>{
@@ -11,7 +12,9 @@ export default function navbar() {
         <div class='navTop'>
             <div class='navLogo'></div>
             <div class='navName'>Subject Allocation</div>
-            <div class='navAdmin'></div>
+            <div class='navAdmin'>
+                <button class='navButton'>Admin</button>
+            </div>
         </div>
     )
 }
