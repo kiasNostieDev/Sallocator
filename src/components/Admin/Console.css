@@ -1,0 +1,17 @@
+.consoleOptions{
+    height: 60vh;
+    width: 35vw;
+    border-radius: 5%;
+    margin: 5vw;
+    padding: 2vw;
+    height: fit-content;
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (max-width: 800px){
+    .consoleOptions{
+        float: unset;
+        width: 85vw;
+    }
+}

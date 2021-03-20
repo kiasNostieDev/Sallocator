@@ -5,13 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Admin from './components/Admin';
+import Console from './components/Admin/Console';
 
 ReactDOM.render(
   <Router>
     <div>
       <Switch>
         <Route exact path='/' component={App} />
-        <Route path='/admin' component={Admin}/>
+        <Route path='/admin' component={Admin} />
+        <Route path='/console' component={Console} />
       </Switch>
     </div>
   </Router>,

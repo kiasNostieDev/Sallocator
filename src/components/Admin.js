@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import './Admin.css'
 import fbref from '../Firebase'
 import firebase from 'firebase/app'
-import {FormControl, OutlinedInput, InputLabel, Button} from '@material-ui/core'
+import { FormControl, OutlinedInput, InputLabel, Button, FormHelperText } from '@material-ui/core'
+import createHistory from 'history/createBrowserHistory'
 
 export default function Admin() {
+    const history = createHistory()
     var i1, i2
-    const [banner, setBanner] = useState    ('Admin Login')
+    const [banner, setBanner] = useState('Admin Login')
 
     function AdminLogin() {
         return (
@@ -20,6 +22,7 @@ export default function Admin() {
                     <FormControl style={{width: '400px'}} variant="outlined">
                         <InputLabel htmlFor="standard-adornment-amount" >Email</InputLabel>
                         <OutlinedInput onChange={(e)=>i1=e.target.value} labelWidth={60}/>
+                        <FormHelperText>Must be in mail format</FormHelperText>
                     </FormControl>
                     <div style={{marginTop:"20px"}}></div>
                     <FormControl style={{width: '400px'}} variant="outlined">
@@ -32,6 +35,8 @@ export default function Admin() {
                             .then((userCredentials) => {
                                 var user = userCredentials.user
                                 console.log(user)
+                                history.push('/console')
+                                window.location.reload()
                             })
                             .catch((error) => {
                                 console.log(error)
