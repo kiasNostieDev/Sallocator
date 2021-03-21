@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Admin.css'
-import fbref from '../Firebase'
 import firebase from 'firebase/app'
 import { FormControl, OutlinedInput, InputLabel, Button, FormHelperText } from '@material-ui/core'
 import createHistory from 'history/createBrowserHistory'
