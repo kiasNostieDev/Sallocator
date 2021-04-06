@@ -26,7 +26,7 @@
 .SVGSide{
     width: 30%;
     height: 100vh;
-    background-image: linear-gradient(to top right, #FF4000, white, white);
+    background-image: linear-gradient(to top right, #50B2C0, white, white);
     float: left;
 }
 

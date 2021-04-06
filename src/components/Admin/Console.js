@@ -5,15 +5,29 @@ import { Button, FormControl, FormHelperText, InputLabel, makeStyles, MenuItem, 
 import React from 'react'
 import './Console.css'
 import SaveIcon from '@material-ui/icons/Save';
+import firebase from 'firebase/app'
+import fbref from '../../Firebase'
 
 const useStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing(1),
     },
+    form: {
+        marginLeft: '30px',
+        width: '40%',
+        // eslint-disable-next-line no-useless-computed-key
+        ['@media (max-width:400px)']: {
+            marginLeft: 'unset',
+            width: '60%',
+            marginTop: "2%"
+        }
+    }
 }));
 
 export default function Console() {
     const classes = useStyles();
+    let courseName, staffName, staffShortForm
+    let prefixSelection, positionSelection, semesterSelection, typeSelection, deptSelection
     
     const annotation = [
         {
@@ -40,46 +54,46 @@ export default function Console() {
 
     const position = [
         {
-            value: 'Professor & Head',
-            label: 'Prof. & Head'
+            label: 'Professor & Head',
+            value: 'Prof. & Head'
         },
         {
-            value: 'Professor',
-            label: 'Prof.'
+            label: 'Professor',
+            value: 'Prof.'
         },
         {
-            value: 'Associate Professor',
-            label: 'Asso. Prof.'
+            label: 'Associate Professor',
+            value: 'Asso. Prof.'
         },
         {
-            value: 'Assistant Professor',
-            label: 'Asst. Prof.'
+            label: 'Assistant Professor',
+            value: 'Asst. Prof.'
         },
         {
-            value: '',
-            label: 'Custom'
+            label: '',
+            value: 'Custom'
         }
     ]
 
     const sem = [
         {
-            value: 'I',
+            value: 'Ist-Sem',
             label: 'I'
         },
         {
-            value: 'II',
+            value: 'IInd-Sem',
             label: 'II'
         },
         {
-            value: 'III',
+            value: 'IIIrd-Sem',
             label: 'III'
         },
         {
-            value: 'IV',
+            value: 'IVth-Sem',
             label: 'IV'
         },
         {
-            value: 'V',
+            value: 'Vth-Sem',
             label: 'V'
         },
         {
@@ -137,6 +151,12 @@ export default function Console() {
             label: 'BME'
         },
     ]
+
+    function Alert() {
+        return (
+            <div className='ConsoleAlert'>Value added</div>
+        )
+    }
        
     function StaffEntry(props) {
 
@@ -144,9 +164,9 @@ export default function Console() {
             if (props.ShortRen) {
                 return (
                     <>
-                        <FormControl style={{ width: '40%', marginLeft: '30px' }} variant="outlined">
+                        <FormControl className={classes.form} variant="outlined">
                             <InputLabel htmlFor="standard-adornment-amount" >ShortForm</InputLabel>
-                            <OutlinedInput labelWidth={100} />
+                            <OutlinedInput labelWidth={100} onChange={(e) => staffShortForm= e.target.value}/>
                             <FormHelperText>Enter the Short Format</FormHelperText>
                         </FormControl>
                     </>
@@ -158,12 +178,13 @@ export default function Console() {
             if (props.CondRen) {
                 return (
                     <TextField
-                        style={{ marginLeft: '30px' }}
+                        className={classes.form}
                         id="outlined-select-dept"
                         select
                         label={props.t3}
                         helperText={props.h3}
                         variant="outlined"
+                        onChange={e=>deptSelection = e.target.value}
                     >
                         {props.source3.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -173,6 +194,24 @@ export default function Console() {
                     </TextField>
                 )
             } else return null;
+        }
+
+        function handleChangeTXT1(e) {
+            // let prefixSelection, positionSelection, semesterSelection, typeSelection
+            if (props.title === 'Add Staff') {
+                prefixSelection = e.target.value
+            } else if (props.title === 'Add Course') {
+                semesterSelection = e.target.value
+            }
+        }
+        
+        function handleChangeTXT2(e) {
+            // let prefixSelection, positionSelection, semesterSelection, typeSelection
+            if (props.title === 'Add Staff') {
+                positionSelection = e.target.value
+            } else if (props.title === 'Add Course') {
+                typeSelection = e.target.value
+            }
         }
 
         return (
@@ -185,6 +224,7 @@ export default function Console() {
                     label={props.t1}
                     helperText={props.h1}
                     variant="outlined"
+                    onChange={handleChangeTXT1}
                 >
                     {props.source1.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
@@ -201,6 +241,7 @@ export default function Console() {
                     label={props.t2}
                     helperText={props.h2}
                     variant="outlined"
+                    onChange={handleChangeTXT2}
                 >
                     {props.source2.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
@@ -211,11 +252,40 @@ export default function Console() {
                 <div style={{marginTop: '2%'}}></div>
                 <FormControl style={{width: '90%'}} variant="outlined">
                     <InputLabel htmlFor="standard-adornment-amount" >Name</InputLabel>
-                    <OutlinedInput labelWidth={100} />
+                    <OutlinedInput labelWidth={100} onChange={(e)=>{
+                        if (props.title === 'Add Staff') staffName = e.target.value
+                        else courseName = e.target.value
+                    }} />
                     <FormHelperText>Enter the Name and custom annotations if needed</FormHelperText>
                 </FormControl>
                 <div style={{marginTop: '5%'}}></div>
                 <Button
+                    onClick={() => {
+                        if (props.title === 'Add Staff') {
+                            const finalName = prefixSelection + ' ' + staffName + ' ' + positionSelection
+                            const staffData = {
+                                fullName: finalName,
+                                shortName: staffShortForm
+                            }
+                            console.log(finalName, staffShortForm)
+                            const staffRef = firebase.database().ref()
+                            staffRef.child('StaffList/'+finalName.split('.').join("")).set(staffData)
+                            staffRef.on('value', snap => {
+                                console.log(snap.val())
+                            })
+                        } else if (props.title === 'Add Course') {
+                            const finalCourse = semesterSelection + '-' + deptSelection + '-' + courseName + '-' + typeSelection
+                            const courseData = {
+                                courseName: finalCourse
+                            }                            
+                            console.log(finalCourse)
+                            const courseRef = firebase.database().ref()
+                            courseRef.child('CourseList/' + finalCourse.split('.').join(" ")).set(courseData)
+                            courseRef.on('value', snap => {
+                                console.log(snap.val().CourseList)
+                            })
+                        }
+                    }}
                     variant="contained"
                     size="medium"
                     startIcon={<SaveIcon />}
@@ -228,14 +298,31 @@ export default function Console() {
         )
     }
 
+    function NumberBanner() {
+        return (
+            <div className='Databanner'>
+                <div className='Staffcount'>
+                    <div className='labelName'>StaffCount:</div>
+                    <div className='Numberbanner'>69</div>
+                </div>
+                <div className='Coursecount'>
+                    <div className='labelName'>CourseCount:</div>
+                    <div className='Numberbanner'>69</div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className='adminConsole'>
+            <NumberBanner />
             <div className='consoleOptions'>
                 <StaffEntry source1={annotation} source2={position}  t1="Prefix" t2='Position' CondRen={false} ShortRen={true} h1='Please select the annotation' h2='Please select the position' title='Add Staff'/>
             </div>
             <div className='consoleOptions'>
                 <StaffEntry source1={sem} source2={type} source3={dept} t1="Semester" t2='Type' t3='Dept' CondRen={true} ShortRen={false} h1='Please select the semester' h2='Please select the type' h3='Please select the dept' title='Add Course'/>
             </div>
+            {/* <Alert/> */}
         </div>
     )
 }

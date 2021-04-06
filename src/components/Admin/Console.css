@@ -1,17 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,900&display=swap');
+
+.Databanner{
+    width: 98%;
+    padding: 1%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    text-align: center;
+    background-color: #201E1F;
+}
+
+.Staffcount{
+    flex: 1;
+}
+
+.Coursecount{
+    flex: 1;
+}
+
+.labelName{
+    font-family: 'Raleway', sans-serif;
+    font-size: 30pt;
+    color: #E6AF2E;
+}
+
+.Numberbanner{
+    font-size: 42pt;
+    color: white;
+    font-family: 'Mulish', sans-serif;
+}
+
 .consoleOptions{
-    height: 60vh;
+    height: fit-content;
     width: 35vw;
     border-radius: 5%;
     margin: 5vw;
+    margin-top: 15vw;
     padding: 2vw;
     height: fit-content;
     float: left;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.ConsoleAlert{
+    margin-top: calc(80vh);
+    right: 0;
+    position: fixed;
+    top: 0;
+    height: 50px;
+    width: 30vw;
+    font-size: 20pt;
+    background-color: #50B2C0;
+    color: black;
+}
+
 @media only screen and (max-width: 800px){
     .consoleOptions{
         float: unset;
         width: 85vw;
+        margin-top: 26vw;
+    }
+
+    .labelName{
+        font-size: 18pt;
+    }
+
+    .Numberbanner{
+        font-size: 30pt;
     }
 }
