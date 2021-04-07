@@ -2,9 +2,10 @@
 // add staff
 
 import { Button, FormControl, FormHelperText, InputLabel, makeStyles, MenuItem, OutlinedInput, TextField, Typography } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import './Console.css'
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 import firebase from 'firebase/app'
 import fbref from '../../Firebase'
 
@@ -25,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Console() {
-    const classes = useStyles();
+    const classes = useStyles()
+    const [isLoading, setIsLoading] = useState('1')
+    const [courseList, setCourseList] = useState([])
     let courseName, staffName, staffShortForm
     let prefixSelection, positionSelection, semesterSelection, typeSelection, deptSelection
     
@@ -152,9 +155,46 @@ export default function Console() {
         },
     ]
 
+    if (isLoading === '1') {
+        var courseListInit
+        firebase.database().ref('CourseList/').on('value', (snap) => {
+            snap.forEach(csnap => {
+                var key = csnap.key
+                var val = csnap.val()
+                console.log(key, val)
+            })
+        })
+    }
+
     function Alert() {
         return (
             <div className='ConsoleAlert'>Value added</div>
+        )
+    }
+
+    function ConsoleList(props) {
+
+        function ListEntity() {
+            return (
+                <div className='consoleListItem'>
+                    <div className='cliName'>staffName</div>
+                    <Button
+                        size="medium"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}
+                    >
+                        Delete
+                    </Button>
+                </div>
+            )
+        }
+
+        return (
+            <>
+                <Typography style={{ fontFamily: 'Mulish', textAlign: 'center' }} variant='h4'>Heading</Typography>
+                <ListEntity />
+                <ListEntity />
+            </>
         )
     }
        
@@ -265,7 +305,9 @@ export default function Console() {
                             const finalName = prefixSelection + ' ' + staffName + ' ' + positionSelection
                             const staffData = {
                                 fullName: finalName,
-                                shortName: staffShortForm
+                                shortName: staffShortForm,
+                                prefix: prefixSelection,
+                                position: positionSelection
                             }
                             console.log(finalName, staffShortForm)
                             const staffRef = firebase.database().ref()
@@ -276,7 +318,10 @@ export default function Console() {
                         } else if (props.title === 'Add Course') {
                             const finalCourse = semesterSelection + '-' + deptSelection + '-' + courseName + '-' + typeSelection
                             const courseData = {
-                                courseName: finalCourse
+                                courseName: finalCourse,
+                                semester: semesterSelection,
+                                department: deptSelection,
+                                type: typeSelection
                             }                            
                             console.log(finalCourse)
                             const courseRef = firebase.database().ref()
@@ -316,13 +361,18 @@ export default function Console() {
     return (
         <div className='adminConsole'>
             <NumberBanner />
+            <div className='consoleListName'>
+                <ConsoleList />
+            </div>
+            <div className='consoleListSubject'>
+                <ConsoleList />
+            </div>
             <div className='consoleOptions'>
                 <StaffEntry source1={annotation} source2={position}  t1="Prefix" t2='Position' CondRen={false} ShortRen={true} h1='Please select the annotation' h2='Please select the position' title='Add Staff'/>
             </div>
             <div className='consoleOptions'>
                 <StaffEntry source1={sem} source2={type} source3={dept} t1="Semester" t2='Type' t3='Dept' CondRen={true} ShortRen={false} h1='Please select the semester' h2='Please select the type' h3='Please select the dept' title='Add Course'/>
             </div>
-            {/* <Alert/> */}
         </div>
     )
 }
