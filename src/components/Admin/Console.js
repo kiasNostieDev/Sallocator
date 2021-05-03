@@ -4,8 +4,8 @@
 import { Button, FormControl, FormHelperText, InputLabel, makeStyles, MenuItem, OutlinedInput, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import './Console.css'
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save'
+import DeleteIcon from '@material-ui/icons/Delete'
 import firebase from 'firebase/app'
 import fbref from '../../Firebase'
 
@@ -29,6 +29,7 @@ export default function Console() {
     const classes = useStyles()
     const [isLoading, setIsLoading] = useState('1')
     const [courseList, setCourseList] = useState([])
+    const [staffList, setStaffList] = useState([])
     let courseName, staffName, staffShortForm
     let prefixSelection, positionSelection, semesterSelection, typeSelection, deptSelection
     
@@ -156,44 +157,110 @@ export default function Console() {
     ]
 
     if (isLoading === '1') {
-        var courseListInit
-        firebase.database().ref('CourseList/').on('value', (snap) => {
+        var courseListInit = [], staffListInit = []
+        firebase.database().ref('CourseList/').once('value', (snap) => {
             snap.forEach(csnap => {
                 var key = csnap.key
-                var val = csnap.val()
-                console.log(key, val)
+                courseListInit.push(key)
             })
+            setCourseList(courseListInit)
         })
-    }
 
-    function Alert() {
-        return (
-            <div className='ConsoleAlert'>Value added</div>
-        )
+        firebase.database().ref('StaffList/').once('value', (snap) => {
+            snap.forEach(csnap => {
+                var key = csnap.key
+                staffListInit.push(key)
+            })
+            setStaffList(staffListInit)
+        })
+
+        setIsLoading('0')
     }
 
     function ConsoleList(props) {
 
         function ListEntity() {
+            if (props.heading === 'Staff List') {
+                return (
+                    staffList.map(name=>{
+                        return (
+                            <div className='consoleListItem'>
+                                <div className='cliName'>{name}</div>
+                                <Button
+                                    onClick={() => {
+                                        firebase.database().ref('StaffList/').child(name).remove()
+                                        firebase.database().ref('StaffList/').on('value', snap => {
+                                            let staffListUpdated = []
+                                            snap.forEach(item => {
+                                                staffListUpdated.push(item.key)
+                                            })
+                                            setStaffList(staffListUpdated)
+                                        })
+                                    }}
+                                    size="medium"
+                                    className={classes.button}
+                                    startIcon={<DeleteIcon />}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
+                        )
+                    })
+                )
+            }
             return (
-                <div className='consoleListItem'>
-                    <div className='cliName'>staffName</div>
-                    <Button
-                        size="medium"
-                        className={classes.button}
-                        startIcon={<DeleteIcon />}
-                    >
-                        Delete
-                    </Button>
-                </div>
+                courseList.map(name=>{
+                    return (
+                        <div className='consoleListItem'>
+                            <div className='cliName'>{name}</div>
+                            <Button
+                                onClick={() => {
+                                    firebase.database().ref('CourseList/').child(name).remove()
+                                    firebase.database().ref('CourseList/').on('value', snap => {
+                                        let courseListUpdated = []
+                                        snap.forEach(item => {
+                                            courseListUpdated.push(item.key)
+                                        })
+                                        setCourseList(courseListUpdated)
+                                    })
+                                }}
+                                size="medium"
+                                className={classes.button}
+                                startIcon={<DeleteIcon />}
+                            >
+                                Delete
+                            </Button>
+                        </div>
+                    )
+                })
             )
         }
 
         return (
             <>
-                <Typography style={{ fontFamily: 'Mulish', textAlign: 'center' }} variant='h4'>Heading</Typography>
+                <Typography style={{ fontFamily: 'Mulish', textAlign: 'center' }} variant='h4'>{props.heading}</Typography>
                 <ListEntity />
-                <ListEntity />
+                <Button
+                    onClick={() => {
+                        if (props.heading === 'Staff List') {
+                            if (window.confirm("Are you sure wanna wipe out all the data?"))
+                                firebase.database().ref('StaffList/').remove()
+                                setStaffList([])
+                        } else {
+                            if (window.confirm("Are you sure wanna wipe out all the courses?")) {
+                                firebase.database().ref('CourseList/').remove()
+                                setCourseList([])
+                            }
+                        }}
+                    }
+                    fullWidth
+                    style={{color:'red'}}
+                    size="medium"
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
+                >
+                    Flush whole Staff List
+                </Button>
             </>
         )
     }
@@ -257,7 +324,7 @@ export default function Console() {
         return (
             <>
                 <Typography style={{fontFamily: 'Mulish', textAlign: 'center'}} variant='h5'>{props.title}</Typography>
-                <div style={{marginTop: '4%'}}></div> 
+                <div style={{marginTop: '4%'}}></div>
                 <TextField
                     id="outlined-select-annotation"
                     select
@@ -312,8 +379,12 @@ export default function Console() {
                             console.log(finalName, staffShortForm)
                             const staffRef = firebase.database().ref()
                             staffRef.child('StaffList/'+finalName.split('.').join("")).set(staffData)
-                            staffRef.on('value', snap => {
-                                console.log(snap.val())
+                            firebase.database().ref('StaffList/').on('value', snap => {
+                                let staffListUpdated = []
+                                snap.forEach(item => {
+                                    staffListUpdated.push(item.key)
+                                })
+                                setStaffList(staffListUpdated)
                             })
                         } else if (props.title === 'Add Course') {
                             const finalCourse = semesterSelection + '-' + deptSelection + '-' + courseName + '-' + typeSelection
@@ -326,8 +397,12 @@ export default function Console() {
                             console.log(finalCourse)
                             const courseRef = firebase.database().ref()
                             courseRef.child('CourseList/' + finalCourse.split('.').join(" ")).set(courseData)
-                            courseRef.on('value', snap => {
-                                console.log(snap.val().CourseList)
+                            firebase.database().ref('CourseList/').on('value', snap=>{
+                                let courseListUpdated = []
+                                snap.forEach(item => {
+                                    courseListUpdated.push(item.key)
+                                })
+                                setCourseList(courseListUpdated)
                             })
                         }
                     }}
@@ -348,31 +423,43 @@ export default function Console() {
             <div className='Databanner'>
                 <div className='Staffcount'>
                     <div className='labelName'>StaffCount:</div>
-                    <div className='Numberbanner'>69</div>
+                    <div className='Numberbanner'>{staffList.length}</div>
                 </div>
                 <div className='Coursecount'>
                     <div className='labelName'>CourseCount:</div>
-                    <div className='Numberbanner'>69</div>
+                    <div className='Numberbanner'>{courseList.length}</div>
                 </div>
             </div>
         )
     }
 
+    function WaitForDataRender() {
+        if(isLoading === '1'){
+            return (
+                <div>loading</div>
+            )
+        } else if (isLoading === '0') {
+            return (
+                <div className='adminConsole'>
+                    <NumberBanner />
+                    <div className='consoleListName'>
+                        <ConsoleList heading='Staff List'/>
+                    </div>
+                    <div className='consoleListSubject'>
+                        <ConsoleList heading='Course List'/>
+                    </div>
+                    <div className='consoleOptions'>
+                        <StaffEntry source1={annotation} source2={position}  t1="Prefix" t2='Position' CondRen={false} ShortRen={true} h1='Please select the annotation' h2='Please select the position' title='Add Staff'/>
+                    </div>
+                    <div className='consoleOptions'>
+                        <StaffEntry source1={sem} source2={type} source3={dept} t1="Semester" t2='Type' t3='Dept' CondRen={true} ShortRen={false} h1='Please select the semester' h2='Please select the type' h3='Please select the dept' title='Add Course'/>
+                    </div>
+                </div>
+            )
+        }
+    }
+
     return (
-        <div className='adminConsole'>
-            <NumberBanner />
-            <div className='consoleListName'>
-                <ConsoleList />
-            </div>
-            <div className='consoleListSubject'>
-                <ConsoleList />
-            </div>
-            <div className='consoleOptions'>
-                <StaffEntry source1={annotation} source2={position}  t1="Prefix" t2='Position' CondRen={false} ShortRen={true} h1='Please select the annotation' h2='Please select the position' title='Add Staff'/>
-            </div>
-            <div className='consoleOptions'>
-                <StaffEntry source1={sem} source2={type} source3={dept} t1="Semester" t2='Type' t3='Dept' CondRen={true} ShortRen={false} h1='Please select the semester' h2='Please select the type' h3='Please select the dept' title='Add Course'/>
-            </div>
-        </div>
+        <WaitForDataRender />
     )
 }

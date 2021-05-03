@@ -4,7 +4,6 @@ import firebase from 'firebase/app'
 import fbref from '../Firebase'
 import { FormControl, OutlinedInput, InputLabel, Button, FormHelperText } from '@material-ui/core'
 import createHistory from 'history/createBrowserHistory'
-import Firebase from '../Firebase'
 
 export default function Admin() {
     const history = createHistory()

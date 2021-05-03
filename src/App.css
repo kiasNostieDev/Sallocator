@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bangers&display=swap');
 
 @keyframes slide-in-top {
   0% {
@@ -40,7 +41,7 @@
   flex: 10;
   float: left;
   font-size: calc(100vh/15);
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-weight: 900;
   text-align: center;
   text-transform: uppercase;

@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Admin from './components/Admin';
 import Console from './components/Admin/Console';
+import AddData from './components/AddData';
+import SubTable from './components/Admin/SubTable';
+import NameTable from './components/Admin/NameTable';
 
 ReactDOM.render(
   <Router>
@@ -13,7 +16,10 @@ ReactDOM.render(
       <Switch>
         <Route exact path='/' component={App} />
         <Route path='/admin' component={Admin} />
+        <Route path='/subtable' component={SubTable} />
+        <Route path='/nametable' component={NameTable} />
         <Route path='/console' component={Console} />
+        <Route path='/addData/:slug' component={AddData} />
       </Switch>
     </div>
   </Router>,

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bangers&display=swap');
+
 @keyframes slide-in-bck-bottom {
     0% {
       -webkit-transform: translateZ(700px) translateY(300px);
@@ -32,7 +34,6 @@
 
 .svgHolder{
     width: 40%;
-    height: 40%;
     margin-left: 4%;
     margin-top: 5%;
     position: absolute;

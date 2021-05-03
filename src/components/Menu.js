@@ -10,15 +10,11 @@ export default function Menu() {
             </div>
 
             <div className='MenuItem'>
-                <div className='ItemName'>Subject Based Table</div>
+                <Link to='/subtable' style={{textDecoration: 'none'}}><div className='ItemName'>Subject Based Table</div></Link>
             </div>
 
             <div className='MenuItem'>
-                <div className='ItemName'>Course Based Table</div>
-            </div>
-
-            <div className='MenuItem'>
-                <div className='ItemName'>Preference Data</div>
+                <Link to='/nametable' style={{textDecoration: 'none'}}><div className='ItemName'>Staff Based Table</div></Link>
             </div>
         </div>
     )

@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bangers&display=swap');
+
+*{
+    overflow-x: hidden;
+}
+
+.topArea1{
+    height: fit-content;
+    background-color: #201E1F;
+    width: 100vw;
+    display: flex;
+    padding: 2% 0 2% 0;
+}
+  
+.titleArea1{
+    background-color: #201E1F;
+    flex: 10;
+    float: left;
+    font-size: calc(100vh/20);
+    font-family: 'Audiowide', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    text-transform: capitalize;
+    color: #E6AF2E;
+    letter-spacing: 2px;
+}
+
+.AddData{
+    width: 85vw;
+    margin-left: 5vw;
+    margin-right: 2.5vw;
+    padding: 2.5vw;
+    height: fit-content;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(6, 111, 230, 0.19);
+    border-radius: 20px;
+    border: solid 0.4px; 
+}

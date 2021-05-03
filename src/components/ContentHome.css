@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,900&display=swap');
+
+.NamesHolder{
+    margin: 30px 2.5vw 20px 2.5vw;
+    width: 95vw;
+    height: fit-content;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px; */
+}
+
+.consoleListItem{
+    width: 98%;
+    padding: 1%;
+    border-radius: 7px;
+    border: solid;
+    border-color: rgb(163, 163, 163);
+    border-width: 0 0 0.1px 0;
+}
+
+.cliName{
+    font-size: 17pt;
+    margin-top: 10px;
+    transition: ease-in-out 0.3s;
+    font-family: 'Mulish', sans-serif;
+    width: 86%;
+    float: left;
+}
+
+@media only screen and (max-width: 800px){
+    .NamesHolder{
+        padding: 3%;
+        margin: unset;
+        box-shadow: unset;
+        border-radius: unset;
+    }
+
+    .cliName{
+        width: 50%;
+        float: left;
+    }
+
+    .cliButton{
+        float: left;
+    }
+}
