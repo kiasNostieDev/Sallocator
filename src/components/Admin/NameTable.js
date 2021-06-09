@@ -19,23 +19,33 @@ export default function NameTable() {
         let staffsArray = [], lvl1=[],lvl2=[],lvl3=[],lvl4=[]
         firebase.database().ref('StaffList/').once('value', snap => {
             snap.forEach(item => {
+                staffsArray.push(item.val())
                 if (item.val().position === "Prof. & Head") lvl1.push(item.val())
                 if (item.val().position === "Prof.") lvl2.push(item.val())
                 if (item.val().position === "Asso. Prof.") lvl3.push(item.val())
                 if (item.val().position === "Asst. Prof.") lvl4.push(item.val())
             })
-            lvl1.forEach(staff => {
-                staffsArray.push(staff)
-            })
-            lvl2.forEach(staff => {
-                staffsArray.push(staff)
-            })
-            lvl3.forEach(staff => {
-                staffsArray.push(staff)
-            })
-            lvl4.forEach(staff => {
-                staffsArray.push(staff)
-            })
+            for (var a = 0; a < staffsArray.length; a++){
+                for (var b = 0; b < staffsArray.length; b++){
+                    if (staffsArray[a].rank < staffsArray[b].rank) {
+                        var temp = staffsArray[a]
+                        staffsArray[a] = staffsArray[b]
+                        staffsArray[b] = temp
+                    }
+                }
+            }
+            // lvl1.forEach(staff => {
+            //     staffsArray.push(staff)
+            // })
+            // lvl2.forEach(staff => {
+            //     staffsArray.push(staff)
+            // })
+            // lvl3.forEach(staff => {
+            //     staffsArray.push(staff)
+            // })
+            // lvl4.forEach(staff => {
+            //     staffsArray.push(staff)
+            // })
             setUserData(staffsArray)
         })
         setIsLoading('0')
@@ -48,26 +58,47 @@ export default function NameTable() {
                     <TableContainer component={Paper}>
                         <TableHead>
                             <TableRow>
+                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>S.no</TableCell>
                                 <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Name</TableCell>
-                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Theory1</TableCell>
-                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Theory2</TableCell>
-                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Theory3</TableCell>
-                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Theory4</TableCell>
-                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Lab1</TableCell>
-                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Lab2</TableCell>
+                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Theory Preferences</TableCell>
+                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Lab Preferences</TableCell>
+                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Theory Allocated</TableCell>
+                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Lab Allocated</TableCell>
+                                <TableCell align='center' style={{fontFamily: 'Mulish', fontWeight: 'bolder'}}>Staff Signature</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>{
                             userData.map(item => {
+                                var a, b, c, d, l1, l2
+                                a = item.theory1
+                                b = item.theory2
+                                c = item.theory3
+                                d = item.theory4
+                                l1 = item.lab1
+                                l2 = item.lab2
+                                if(a===undefined)a=""
+                                if(b===undefined)b=""
+                                if(c===undefined)c=""
+                                if(d===undefined)d=""
+                                if(l1===undefined)l1=""
+                                if(l2===undefined)l2=""
                                 return (
                                     <TableRow>
+                                    <TableCell align='left' style={{fontFamily: 'Mulish'}}>{userData.indexOf(item)+1}</TableCell>
                                         <TableCell align='left' style={{fontFamily: 'Mulish'}}>{item.fullName}</TableCell>
-                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}>{item.theory1}</TableCell>
-                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}>{item.theory2}</TableCell>
-                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}>{item.theory3}</TableCell>
-                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}>{item.theory4}</TableCell>
-                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}>{item.lab1}</TableCell>
-                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}>{item.lab2}</TableCell>
+                                        <TableCell align='center' style={{ fontFamily: 'Mulish' }}>
+                                            <TableRow align='center' style={{fontFamily: 'Mulish'}}>{"1. " + a}</TableRow>
+                                            <TableRow align='center' style={{fontFamily: 'Mulish'}}>{"2. " + b}</TableRow>
+                                            <TableRow align='center' style={{fontFamily: 'Mulish'}}>{"3. " + c}</TableRow>
+                                            <TableRow align='center' style={{fontFamily: 'Mulish'}}>{"4. " + d}</TableRow>
+                                        </TableCell>
+                                        <TableCell align='center' style={{ fontFamily: 'Mulish' }}>
+                                            <TableRow align='center' style={{fontFamily: 'Mulish'}}>{"1. " + l1}</TableRow>
+                                            <TableRow align='center' style={{fontFamily: 'Mulish'}}>{"2. " + l2}</TableRow>
+                                        </TableCell>
+                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}></TableCell>
+                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}></TableCell>
+                                        <TableCell align='center' style={{fontFamily: 'Mulish'}}></TableCell>
                                     </TableRow>
                                 )
                             })

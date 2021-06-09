@@ -30,15 +30,61 @@ export default function AddData(props) {
     let t1,t2,t3,t4,l1,l2
 
     if (isLoading === '1') {
-        var courseListTheory = [], courseListLab = [], shortForm = ""
+        var courseListTheory = [], courseListLab = [], shortForm = "", clia = [], clib = [], sem1 = [], sem2 = [], sem3 = [], sem4 = []
+        var sem1l = [], sem2l = [], sem3l = [], sem4l = [], leftovers = [], cli2=[], me1 = [], me2 = []
         firebase.database().ref('CourseList/').once('value', (snap) => {
             snap.forEach(csnap => {
-                var key = csnap.key
-                if(csnap.val().type === 'Lab')courseListLab.push(key)
-                else courseListTheory.push(key)
+                if(csnap.val().type === 'Lab')clib.push(csnap.val())
+                else clia.push(csnap.val())
             })
+
+            for (var a = 0; a < clia.length; a++) {
+                if (clia[a].semester === "Ist-Sem" || clia[a].semester === "IInd-Sem") {
+                    if(clia[a].degree === "ME")me1.push(clia[a])
+                    else sem1.push(clia[a])
+                }
+                else if (clia[a].semester === "IIIrd-Sem" || clia[a].semester === "IVth-Sem") {
+                    if(clia[a].degree === "ME")me2.push(clia[a])
+                    else sem2.push(clia[a])
+                }
+                else if(clia[a].semester === "Vth-Sem" || clia[a].semester === "VIth-Sem")sem3.push(clia[a])
+                else if (clia[a].semester === "VIIth-Sem" || clia[a].semester === "VIIIth-Sem") sem4.push(clia[a])
+                else courseListTheory.push(clia[a].courseName)
+            }
+            sem1.forEach(course => {
+                if (course.department === 'CSE') courseListTheory.push(course.courseName)
+                else leftovers.push(course.courseName)
+            })
+            sem2.forEach(course=>{
+                if (course.department === 'CSE') courseListTheory.push(course.courseName)
+                else leftovers.push(course.courseName)
+            })
+            sem3.forEach(course=>{
+                if (course.department === 'CSE') courseListTheory.push(course.courseName)
+                else leftovers.push(course.courseName)
+            })
+            sem4.forEach(course => {
+                if (course.department === 'CSE') courseListTheory.push(course.courseName)
+                else leftovers.push(course.courseName)
+            })
+            leftovers.forEach(course=>courseListTheory.push(course))
+            me1.forEach(course=>courseListTheory.push(course.courseName))
+            me2.forEach(course=>courseListTheory.push(course.courseName))
+            courseListTheory.forEach(i=>console.log(i))
+            for (a = 0; a < clib.length; a++) {
+                if (clib[a].semester === "Ist-Sem" || clib[a].semester === "IInd-Sem") sem1l.push(clib[a])
+                else if (clib[a].semester === "IIIrd-Sem" || clib[a].semester === "IVth-Sem") sem2l.push(clib[a])
+                else if(clib[a].semester === "Vth-Sem" || clib[a].semester === "VIth-Sem")sem3l.push(clib[a])
+                else if (clib[a].semester === "VIIth-Sem" || clib[a].semester === "VIIIth-Sem") sem4l.push(clib[a])
+                else courseListLab.push(clib[a].courseName)
+            }
+            sem1l.forEach(course=>courseListLab.push(course.courseName))
+            sem2l.forEach(course=>courseListLab.push(course.courseName))
+            sem3l.forEach(course=>courseListLab.push(course.courseName))
+            sem4l.forEach(course=>courseListLab.push(course.courseName))
             setTheoryList(courseListTheory)
             setLabList(courseListLab)
+            console.log(courseListTheory.length, courseListLab.length)
         })
         firebase.database().ref('StaffList/' + slug.split('.').join("")).once(('value'), snap => {
             shortForm = snap.val().shortName

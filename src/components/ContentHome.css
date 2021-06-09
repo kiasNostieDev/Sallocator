@@ -9,7 +9,7 @@
     border-radius: 20px; */
 }
 
-.consoleListItem{
+.consoleListItem1{
     width: 98%;
     padding: 1%;
     border-radius: 7px;
@@ -18,7 +18,7 @@
     border-width: 0 0 0.1px 0;
 }
 
-.cliName{
+.cliName1{
     font-size: 17pt;
     margin-top: 10px;
     transition: ease-in-out 0.3s;

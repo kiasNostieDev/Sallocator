@@ -59,6 +59,7 @@
 
 .cliName{
     font-size: 15pt;
+    color: grey;
     margin-top: 10px;
     transition: ease-in-out 0.3s;
     font-family: 'Mulish', sans-serif;

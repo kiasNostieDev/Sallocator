@@ -16,14 +16,51 @@ export default function SubTable() {
     const [yearSem, setYearSem] = useState(['2021-2022','ODD'])
 
     function dataLoader() {
-        let courseDataInit = []
+        let courseDataInit = [], clia=[], sem1=[], sem2=[], sem3=[], sem4=[], leftovers=[], courseListTheory=[], me1=[], me2=[]
         firebase.database().ref('CourseList/').once('value', snap => {
             snap.forEach(item => {
+                clia.push(item.val())
+            })
+
+            for (var a = 0; a < clia.length; a++) {
+                if (clia[a].semester === "Ist-Sem" || clia[a].semester === "IInd-Sem") {
+                    if(clia[a].degree === "ME")me1.push(clia[a])
+                    else sem1.push(clia[a])
+                }
+                else if (clia[a].semester === "IIIrd-Sem" || clia[a].semester === "IVth-Sem") {
+                    if(clia[a].degree === "ME")me2.push(clia[a])
+                    else sem2.push(clia[a])
+                }
+                else if(clia[a].semester === "Vth-Sem" || clia[a].semester === "VIth-Sem")sem3.push(clia[a])
+                else if (clia[a].semester === "VIIth-Sem" || clia[a].semester === "VIIIth-Sem") sem4.push(clia[a])
+                else courseListTheory.push(clia[a])
+            }
+            sem1.forEach(course => {
+                if (course.department === 'CSE') courseListTheory.push(course)
+                else leftovers.push(course)
+            })
+            sem2.forEach(course=>{
+                if (course.department === 'CSE') courseListTheory.push(course)
+                else leftovers.push(course)
+            })
+            sem3.forEach(course=>{
+                if (course.department === 'CSE') courseListTheory.push(course)
+                else leftovers.push(course)
+            })
+            sem4.forEach(course => {
+                if (course.department === 'CSE') courseListTheory.push(course)
+                else leftovers.push(course)
+            })
+            leftovers.forEach(course=>courseListTheory.push(course))
+            me1.forEach(course=>courseListTheory.push(course))
+            me2.forEach(course => courseListTheory.push(course))
+
+            courseListTheory.forEach(course => {
                 let staffPref = ""
-                let staffPref1 = item.val().Prefered1
-                let staffPref2 = item.val().Prefered2
-                let staffPref3 = item.val().Prefered3
-                let staffPref4 = item.val().Prefered4
+                let staffPref1 = course.Prefered1
+                let staffPref2 = course.Prefered2
+                let staffPref3 = course.Prefered3
+                let staffPref4 = course.Prefered4
                 if (staffPref1 !== undefined) {
                     for (let key in staffPref1) {
                         staffPref += staffPref1[key] + ", "
@@ -44,16 +81,15 @@ export default function SubTable() {
                         staffPref += staffPref4[key] + ", "
                     }
                 }
-                console.log(staffPref)
-                courseDataInit.push([item.key, staffPref])
+                courseDataInit.push([course.courseName, staffPref])
             })
+
             setCourseData(courseDataInit)
         })
         setIsLoading('0')
     }
 
     function Tabler() {
-        console.log(courseData)
         return (
             <div className='StaffBasedList'>
                 <Table>
